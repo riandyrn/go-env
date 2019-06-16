@@ -6,13 +6,13 @@ Fetching primitive values from env without hassle in Go!
 
 ## Why
 
-Have you been annoyed when your code become ugly because you need to fetch value from env but you also need to take care of its error when what you need is just its value?
+Have you been annoyed when your code become ugly because you need to fetch value other than string from env but you also need to take care of its parsing error yet the only thing you need is just the value?
 
-Especially if the value you need to fetch is requiring some parsing first (e.g `int`).
+Here is an example of such situation when you are trying to fetch `int` value:
 
 ```go
 ...
-strVal, _ := os.Getenv("IntKey")
+strVal := os.Getenv("IntKey")
 intVal, _ := strconv.Atoi(strVal) // too much hassle!
 ...
 ```
