@@ -1,5 +1,7 @@
 # Go Env
 
+[![Build Status](https://travis-ci.org/riandyrn/go-env.svg?branch=master)](https://travis-ci.org/riandyrn/go-env)
+
 Fetching primitive values from env without hassle in Go!
 
 ## Why
