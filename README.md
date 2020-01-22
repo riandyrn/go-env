@@ -41,6 +41,8 @@ import "github.com/riandyrn/go-env"
 strVal := env.GetString("StrKey") // fetch string value
 intVal := env.GetInt("IntKey") // fetch int value
 boolVal := env.GetBool("BoolKey") // fetch bool value
+secVal := env.GetSeconds("SecondsKey") // fetch duration value in seconds
+strsVal := env.GetStrings("StringsKey") // fetch slice of strings value
 ...
 ```
 
