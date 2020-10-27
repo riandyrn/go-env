@@ -212,6 +212,7 @@ func TestGetStrings(t *testing.T) {
 		EnvValue  string
 		Separator string
 		ExpValue  []string
+		ExpLen    int
 	}{
 		{
 			Name:      "Test Key Not Set",
@@ -219,6 +220,7 @@ func TestGetStrings(t *testing.T) {
 			EnvValue:  "ABC",
 			Separator: ",",
 			ExpValue:  nil,
+			ExpLen:    0,
 		},
 		{
 			Name:      "Test Value Empty",
@@ -226,6 +228,7 @@ func TestGetStrings(t *testing.T) {
 			EnvValue:  "",
 			Separator: ",",
 			ExpValue:  nil,
+			ExpLen:    0,
 		},
 		{
 			Name:      "Test Value Not Empty - Single Item",
@@ -233,6 +236,7 @@ func TestGetStrings(t *testing.T) {
 			EnvValue:  "ABC",
 			Separator: ",",
 			ExpValue:  []string{"ABC"},
+			ExpLen:    1,
 		},
 		{
 			Name:      "Test Value Not Empty - Mulitple Items",
@@ -240,6 +244,7 @@ func TestGetStrings(t *testing.T) {
 			EnvValue:  "ABC,DEF,GHI",
 			Separator: ",",
 			ExpValue:  []string{"ABC", "DEF", "GHI"},
+			ExpLen:    3,
 		},
 		{
 			Name:      "Test Value Not Empty - Mulitple Items With Space",
@@ -247,6 +252,7 @@ func TestGetStrings(t *testing.T) {
 			EnvValue:  "ABC, DEF, G HI",
 			Separator: ", ",
 			ExpValue:  []string{"ABC", "DEF", "G HI"},
+			ExpLen:    3,
 		},
 	}
 	for _, testCase := range testCases {
@@ -255,6 +261,9 @@ func TestGetStrings(t *testing.T) {
 				os.Setenv(testCase.EnvKey, testCase.EnvValue)
 			}
 			val := GetStrings(testCase.EnvKey, testCase.Separator)
+			if len(val) != testCase.ExpLen {
+				t.Fatalf("unexpected length, expected: %v, got: %v", testCase.ExpLen, len(val))
+			}
 			if strings.Join(val, testCase.Separator) != strings.Join(testCase.ExpValue, testCase.Separator) {
 				t.Fatalf("unexpected val, expected: %v, got: %v", testCase.EnvValue, val)
 			}
