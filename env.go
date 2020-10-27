@@ -38,5 +38,8 @@ func GetSeconds(key string) time.Duration {
 // Returns `nil` if key is not exists.
 func GetStrings(key string, sep string) []string {
 	v := GetString(key)
+	if len(v) == 0 {
+		return nil
+	}
 	return strings.Split(v, sep)
 }
